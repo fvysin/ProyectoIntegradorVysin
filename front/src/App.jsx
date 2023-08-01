@@ -7,12 +7,17 @@ import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 
+// const EMAIL: "florvysin@gmail.com";
+// const PASSWORD: "123456789";
+const URL_BASE= "https://rym2-production.up.railway.app/api/character"
+const API_KEY= "key=henrym-fvysin"
 
 function App() {
    const [characters, setCharacters] = useState([]);
+   
 
    const onSearch = (id) =>{
-      axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+      axios(`${URL_BASE}/${id}? ${API_KEY}`).then(({ data }) => {
          if (data.name) {
             setCharacters((oldChars) => [...oldChars, data]);
          } else {
