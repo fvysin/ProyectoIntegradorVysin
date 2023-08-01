@@ -21,7 +21,7 @@ function App() {
          if (data.name) {
             setCharacters((oldChars) => [...oldChars, data]);
          } else {
-            window.alert('¡No hay personajes con este ID!');
+            window.alert('No hay personajes con este ID!');
          }
       });
    };
