@@ -1,27 +1,35 @@
-import './App.css';
+
 import About from './components/About/About.jsx';
 import Cards from './components/Cards/Cards.jsx';
 import Detail from './components/Detail/Detail';
-import NavBar from './components/SearchBar/NavBar';
+import Form from './components/Form/Form';
+import Favorites from './components/Favorites.jsx';
+import NavBar from './components/NavBar/NavBar';
+import { useEffect } from 'react';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
+import './App.module.css';
 
-// const EMAIL: "florvysin@gmail.com";
-// const PASSWORD: "123456789";
-const URL_BASE= "https://rym2-production.up.railway.app/api/character"
+
+const URL_BASE= 'https://rym2-production.up.railway.app/api/character'
 const API_KEY= "key=henrym-fvysin"
+const EMAIL= "florvysin@gmail.com";
+const PASSWORD= "12345F";
 
 function App() {
+
+
    const [characters, setCharacters] = useState([]);
    
-
    const onSearch = (id) =>{
-      axios(`${URL_BASE}/${id}? ${API_KEY}`).then(({ data }) => {
+      axios(`${URL_BASE}/${id}?${API_KEY}`).then(({ data }) => {
          if (data.name) {
             setCharacters((oldChars) => [...oldChars, data]);
          } else {
-            window.alert('No hay personajes con este ID!');
+            window.alert('¡No hay personajes con este ID!');
          }
       });
    };
@@ -34,26 +42,37 @@ function App() {
       )
    };
    
+   const {pathname} = useLocation();
+
+   const navigate = useNavigate();
+   const [access, setAccess] = useState(false)
+   
+  
+   function login(userData){
+      if (userData.password === PASSWORD && userData.email === EMAIL) {
+         setAccess(true);
+         navigate('/home');
+      }
+   }
+   useEffect(() => {
+         !access && navigate('/');
+      }, [access, navigate]);
+
+  
    return (
-      <div className='App'>
-         <NavBar onSearch ={onSearch} />
+      <div className ='App'>
+         
+        {pathname !== '/' && <NavBar onSearch ={onSearch} />}
          <Routes>
-            <Route 
-               path= "/home"
-               element= {<Cards characters={characters} onClose={onClose} />} />
-         
-            <Route 
-               path= "/about" 
-               element= {<About />} />
-            
-            <Route 
-               path= "/detail/:id" 
-               element= {<Detail/>}/>
-         
+            <Route path= "/home"element= {<Cards characters={characters} onClose={onClose} />} />
+            <Route path= "/about" element= {<About/>} />
+            <Route path= "/detail/:id" element= {<Detail/>}/>
+            <Route path= "/" element= {<Form login= {login} />} />
+            <Route path= "/favorites" element= {<Favorites />}/>
          </Routes>
       
       </div>
-   );
+   )
 }
 
 

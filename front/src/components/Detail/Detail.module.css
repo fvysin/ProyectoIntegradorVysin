@@ -1,0 +1,14 @@
+
+
+.ficha{
+    justify-content:space-between;
+    width:auto;
+    border-radius:40px;
+    height:min-content;
+    padding: 5 em;
+    font-size: small;
+    justify-content:center;
+    margin-bottom: 2em;
+    border-spacing: 10 px 5px;
+    border-color: black;
+}

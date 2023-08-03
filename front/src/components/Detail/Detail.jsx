@@ -1,16 +1,21 @@
+/* eslint-disable react/no-unescaped-entities */
 import axios from "axios"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useState } from "react"
+import styled from "./Detail.module.css"
 
-export default function Detail(name, status, species, gender, origin, image){
+const URL_BASE= 'https://rym2-production.up.railway.app/api/character'
+const API_KEY= "key=henrym-fvysin"
+
+export default function Detail(){
     const { id } = useParams()
 
     const [character, setCharacter] = useState([])
     
     useEffect(() => {
-        axios(`https://rickandmortyapi.com/api/character/${id}`).
-        then(({ data }) => {
+        axios(`${URL_BASE}/${id}?${API_KEY}`)
+        .then(({ data }) => {
            if (data.name) {
               setCharacter(data);
            } else {
@@ -18,18 +23,21 @@ export default function Detail(name, status, species, gender, origin, image){
            }
         });
         return setCharacter({});
-     }, [id]);
+       }, [id]);
 
 
     return(
-        <div>
-         { character && <h2>{character.name}</h2>}
-         { character && <h2>{character.status}</h2>}
-         { character && <h2>{character.species}</h2>}
-         { character && <h2>{character.gender}</h2>}
-         { character && <h2>{character.origin.name}</h2>}
-         <img src ={character.image} alt={character.name} />
+      <div >
+            <img src={character.image && character.image} alt="" />
             
+            <div className={styled.ficha}>
+            <h1>Name: {character.name && character.name}</h1>
+            <h1>Status: {character.status && character.status}</h1>
+            <h1>Specie: {character.species && character.species}</h1>
+            <h1>Gender: {character.gender && character.gender}</h1>
+            <h1>Origins: {character.origin?.name && character.origin?.name}</h1>
+
+            </div>
         </div>
     )
 }
