@@ -11,7 +11,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
-import './App.module.css';
+import './App.css';
 
 
 const URL_BASE= 'https://rym2-production.up.railway.app/api/character'

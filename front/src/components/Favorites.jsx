@@ -1,9 +1,11 @@
+// eslint-disable-next-line react-refresh/only-export-components
 /* eslint-disable react/prop-types */
 import {connect} from 'react-redux';
 import Card from './Card/Card';
 import { filterCards, orderCards } from '../Redux/actions';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import styles from './Favorites.module.css';
 
 const Favorites = ({myFavorites})=>{
     const dispatch = useDispatch();
@@ -37,7 +39,7 @@ const Favorites = ({myFavorites})=>{
                 myFavorites.length&& 
                 myFavorites.map(({id, name,status, species,origin,image,gender, onClose})=>{
                     return (
-                        <Card
+                        <Card classname={styles.div}
                         key={id}
                         id={id}
                         name= {name}

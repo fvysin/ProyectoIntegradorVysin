@@ -1,0 +1,16 @@
+.App {
+   text-align: center;
+
+   display: flex;
+   background-size:contain;
+   background-image: url('../src/image/universe-background-filled-with-stars-and-nebula-free-vector.jpg');
+   flex-direction: column; 
+   height: 100%;
+   width: 100%;
+   background-repeat: no-repeat;
+   background-attachment:fixed;
+   
+   background-size:cover;
+   background-position-y: 95%;
+}
+

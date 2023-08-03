@@ -40,13 +40,16 @@ const Card = ({id, onClose, name, status, species, gender, image, removeFav, add
       ) :(
       <button onClick={handleFavorite}>🤍</button>
    )
+   
 }
       <button className = {styles.closeButton} onClick={() =>onClose (id)}> X </button>
-      
+      <br />
+      <br />
          <img className={styles.image} src ={ image} alt={name} />
 
          <Link to={`/detail/${id}`} >
             <h3 className={styles.name}>{name}</h3>
+            <br />
          </Link>
 
          <h2>{status}</h2>

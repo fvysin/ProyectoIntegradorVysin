@@ -31,7 +31,7 @@ export default function SearchBar({onSearch}) {
             className ={styled.button} 
             type="button" 
             onClick= {handleSearchClick}
-            >Agregar
+            >Buscar
             </button>
       </div>
    );
